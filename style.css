@@ -1,0 +1,9 @@
+.col {
+  padding-top: 20%;
+  background: palegoldenrod;
+  border: 1px solid black;
+}
+.box {
+  text-align: center;
+  font-size: 4rem;
+}
