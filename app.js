@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let board = document.querySelectorAll(".col")
   let gameDisplay = document.getElementById("gameBoard")
   let size = 4
   let boardArray = []
