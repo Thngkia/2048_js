@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gameBoard(size)
     insertRandomTwoOrFour(boardArray);
     insertRandomTwoOrFour(boardArray);
+    addTileColors()
   }
 
 
@@ -236,6 +237,53 @@ document.addEventListener('DOMContentLoaded', () => {
     scoreBoard.innerHTML = score
   }
 
+
+
+let addTileColors = () => {
+  console.log("test")
+  boardArray.forEach(item => {
+    let value = item.innerHTML
+    console.log(value)
+    switch (value) {
+      case "0":
+        item.style.color = "palegoldenrod";
+        item.style.background = "palegoldenrod";
+        break;
+      case "2":
+        item.style.color = "black";
+        item.style.background = "green";
+        break;
+      case "4":
+        item.style.color = "black";
+        item.style.background = "lightblue";
+        break;
+      case "8":
+        item.style.color = "black";
+        item.style.background = "orange";
+        break;
+      case "16":
+        item.style.color = "black";
+        item.style.background = "yellow";
+        break;
+      case "32":
+        item.style.color = "black";
+        item.style.background = "red";
+        break;
+      case "64":
+        item.style.color = "black";
+        item.style.background = "blue";
+        break;
+      default:
+        item.style.color = "black";
+        item.style.background = "white";
+        break;
+    }
+  })
+}
+
+  
+
+
 //--------------------Main ----------------//
   createStartingBoard()
   window.addEventListener('keydown', (e) => {
@@ -264,10 +312,9 @@ document.addEventListener('DOMContentLoaded', () => {
       slideDown()
       checkMoveMade(beforeArray)
     }
-
     updateScore()
-      
-    //addTileColors()
+    addTileColors()
+    
   })
 })
 
