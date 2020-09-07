@@ -1,5 +1,5 @@
 # 2048 (Game)
-## Content Page
+## Content
   * [Description](#description)
   * [Gameplay](#gameplay)
   * [Technologies](#Technologies)
