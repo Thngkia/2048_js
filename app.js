@@ -92,8 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-
-
   let slideLeft = () => {
     for (let i = 0; i < size; i++) {
       let row = []
@@ -201,48 +199,50 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-//rotate board 90 deg clockwise
-let rotateBoard = () => {
-  let rotatedBoardArray = []
-  for (let i = 0; i < size; i++) {
-    for (let j = size*size - 1; j >= 0; j--) {
-      if ((j-i) % size == 0) {
-        rotatedBoardArray.push(boardArray[j])
+  //rotate board 90 deg clockwise
+  let rotateBoard = () => {
+    let rotatedBoardArray = []
+    for (let i = 0; i < size; i++) {
+      for (let j = size*size - 1; j >= 0; j--) {
+        if ((j-i) % size == 0) {
+          rotatedBoardArray.push(boardArray[j])
+        }
+      }
+    }   
+    return rotatedBoardArray
+  }
+
+  let checkMoveMade = (beforeArray) => {
+    if (madeMove(beforeArray)) {
+      insertRandomTwo(boardArray)
+    } else {
+      alert("Move is invalid")
+    }
+  }
+
+  let madeMove = (beforeArray) => {
+    for (let i = 0; i < beforeArray.length; i++) {
+      if (beforeArray[i] != boardArray[i].innerHTML) {
+        return true
       }
     }
-  }   
-  return rotatedBoardArray
-}
-let checkMoveMade = (beforeArray) => {
-  if (madeMove(beforeArray)) {
-    insertRandomTwo(boardArray)
-  } else {
-    alert("Move is invalid")
+    return false;
   }
-}
 
-let madeMove = (beforeArray) => {
-  for (let i = 0; i < beforeArray.length; i++) {
-    if (beforeArray[i] != boardArray[i].innerHTML) {
-      return true
-    }
+  let updateScore = () => {
+    let score = 0
+    boardArray.forEach(element => {
+      score += parseInt(element.innerHTML)
+    })
+    scoreBoard.innerHTML = score
   }
-  return false;
-}
-
-let updateScore = () => {
-  let score = 0
-  boardArray.forEach(element => {
-    score = parseInt(element.innerHTML)
-  })
-  scoreBoard.innerHTML = score
-}
 
 //--------------------Main ----------------//
   createStartingBoard()
   window.addEventListener('keydown', (e) => {
      // copy a state of the board
     let beforeArray = boardArray.map(item => item.innerHTML)
+    // checkGameEnd()
     // check key direction and execute the move
     if (e.key == 'ArrowRight') {
       slideRight()
@@ -265,10 +265,7 @@ let updateScore = () => {
       slideDown()
       checkMoveMade(beforeArray)
     }
-    // check if move was made
-    
 
-   
     updateScore()
       
     //addTileColors()
