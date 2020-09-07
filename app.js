@@ -1,293 +1,295 @@
-document.addEventListener('DOMContentLoaded', () => {
-  let gameDisplay = document.getElementById("gameBoard")
-  let size = 4
-  let boardArray = []
-  let scoreBoard = document.getElementById("scoreboard")
 
-  let createStartingBoard = () => {
-    gameBoard(size)
-    insertRandomTwoOrFour(boardArray);
-    insertRandomTwoOrFour(boardArray);
-    addTileColors()
-  }
+let gameDisplay = document.getElementById("gameBoard")
+let size = 4
+let boardArray = []
+let scoreCounter = document.getElementById("score-counter")
+
+let createStartingBoard = () => {
+  gameBoard(size)
+  insertRandomTwoOrFour(boardArray);
+  insertRandomTwoOrFour(boardArray);
+  addTileColors()
+}
 
 
-  let gameBoard = (size) => {
-    let container = document.createElement("div")
-    container.classList.add("container")
-    // nested loop for the 2D matrix
-    for (let i = 0; i < size; i++) {
-      let rowDiv = document.createElement("div")
-      rowDiv.classList.add("row", "row-" + i)
-      for (let j = 0; j < size; j++) {
-        let box = document.createElement("div")
-        box.classList.add("col", "box", "column-" + j)
-        box.setAttribute("id", "box-" + (i*(size) + j) )
-        box.innerHTML += 0
-        rowDiv.append(box)
-        boardArray.push(box)
-      }
-      container.append(rowDiv)
+let gameBoard = (size) => {
+  let container = document.createElement("div")
+  container.classList.add("container")
+  // nested loop for the 2D matrix
+  for (let i = 0; i < size; i++) {
+    let rowDiv = document.createElement("div")
+    rowDiv.classList.add("row", "row-" + i)
+    for (let j = 0; j < size; j++) {
+      let box = document.createElement("div")
+      box.classList.add("col", "box", "column-" + j)
+      box.setAttribute("id", "box-" + (i*(size) + j) )
+      box.innerHTML += 0
+      rowDiv.append(box)
+      boardArray.push(box)
     }
-    gameDisplay.append(container)
+    container.append(rowDiv)
   }
+  gameDisplay.append(container)
+}
 
-  let insertRandomTwoOrFour = (boardArray) => {
-    // find a random position on the board
-    let random = Math.floor(Math.random() * Math.floor(16))
-    // find random 2 or 4
-    let randomNum = (Math.ceil(Math.random() * 2)) * 2
-    // insert to board if there is space
-    if (boardArray[random].innerHTML == 0) {
-      boardArray[random].innerHTML = randomNum
-      return
-    } else {
-      insertRandomTwoOrFour(boardArray)
+let insertRandomTwoOrFour = (boardArray) => {
+  // find a random position on the board
+  let random = Math.floor(Math.random() * Math.floor(16))
+  // find random 2 or 4
+  let randomNum = (Math.ceil(Math.random() * 2)) * 2
+  // insert to board if there is space
+  if (boardArray[random].innerHTML == 0) {
+    boardArray[random].innerHTML = randomNum
+    return
+  } else {
+    insertRandomTwoOrFour(boardArray)
+  }
+}
+
+let insertRandomTwo = (boardArray) => {
+  // find a random position on the board
+  let random = Math.floor(Math.random() * Math.floor(16))
+  // insert to board if there is space
+  if (boardArray[random].innerHTML == 0) {
+    boardArray[random].innerHTML = 2
+    return
+  } else {
+    insertRandomTwo(boardArray)
+  }
+}
+
+let slideRight = () => {
+  for (let i = 0; i < size; i++) {
+    let row = []
+    for (let j = 0; j < size ; j++) {
+      row.push(boardArray[i*size + j].innerHTML)
     }
-  }
-
-  let insertRandomTwo = (boardArray) => {
-    // find a random position on the board
-    let random = Math.floor(Math.random() * Math.floor(16))
-    // insert to board if there is space
-    if (boardArray[random].innerHTML == 0) {
-      boardArray[random].innerHTML = 2
-      return
-    } else {
-      insertRandomTwo(boardArray)
+    let filtered = row.filter(item => item > 0)
+    let remaining = size - filtered.length
+    for (let i = 0; i < remaining; i++) {
+      filtered.unshift(0) 
     }
-  }
-
-  let slideRight = () => {
-    for (let i = 0; i < size; i++) {
-      let row = []
-      for (let j = 0; j < size ; j++) {
-        row.push(boardArray[i*size + j].innerHTML)
-      }
-      let filtered = row.filter(item => item > 0)
-      let remaining = size - filtered.length
-      for (let i = 0; i < remaining; i++) {
-        filtered.unshift(0) 
-      }
-      for (let j = 0; j < size ; j++) {
-        boardArray[i*size + j].innerHTML = filtered[j]
-      }
-    }
-  }
-
-  let combineRight = () => {
-    for (let i = 0; i < size; i++) {
-      //traverse array from right to left
-      for (let j = size - 2; j >= 0;) {
-        let rightVar = parseInt(boardArray[i * size + j + 1].innerHTML)
-        let leftVar = parseInt(boardArray[i * size + j].innerHTML)
-        if (rightVar == leftVar) {
-          boardArray[i * size + j + 1].innerHTML = leftVar + rightVar
-          boardArray[i * size + j].innerHTML = 0
-          j-=2
-        } else {
-          j--
-        }
-      }
+    for (let j = 0; j < size ; j++) {
+      boardArray[i*size + j].innerHTML = filtered[j]
     }
   }
+}
 
-  let slideLeft = () => {
-    for (let i = 0; i < size; i++) {
-      let row = []
-      for (let j = 0; j < size ; j++) {
-        row.push(boardArray[i*size + j].innerHTML)
-      }
-      let filtered = row.filter(item => item > 0)
-      let remaining = size - filtered.length
-      for (let i = 0; i < remaining; i++) {
-        filtered.push(0)
-      }
-      for (let j = 0; j < size ; j++) {
-        boardArray[i*size + j].innerHTML = filtered[j]
+let combineRight = () => {
+  for (let i = 0; i < size; i++) {
+    //traverse array from right to left
+    for (let j = size - 2; j >= 0;) {
+      let rightVar = parseInt(boardArray[i * size + j + 1].innerHTML)
+      let leftVar = parseInt(boardArray[i * size + j].innerHTML)
+      if (rightVar == leftVar) {
+        boardArray[i * size + j + 1].innerHTML = leftVar + rightVar
+        boardArray[i * size + j].innerHTML = 0
+        j-=2
+      } else {
+        j--
       }
     }
   }
+}
 
-  let combineLeft = () => {
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size - 1;) {
-        let rightVar = parseInt(boardArray[i * size + j + 1].innerHTML)
-        let leftVar = parseInt(boardArray[i * size + j].innerHTML)
-        if (rightVar == leftVar && rightVar != 0) {
-          boardArray[i * size + j].innerHTML = leftVar + rightVar
-          boardArray[i * size + j + 1].innerHTML = 0
-          j+=2
-        } else {
-          j++
-        }
+let slideLeft = () => {
+  for (let i = 0; i < size; i++) {
+    let row = []
+    for (let j = 0; j < size ; j++) {
+      row.push(boardArray[i*size + j].innerHTML)
+    }
+    let filtered = row.filter(item => item > 0)
+    let remaining = size - filtered.length
+    for (let i = 0; i < remaining; i++) {
+      filtered.push(0)
+    }
+    for (let j = 0; j < size ; j++) {
+      boardArray[i*size + j].innerHTML = filtered[j]
+    }
+  }
+}
+
+let combineLeft = () => {
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size - 1;) {
+      let rightVar = parseInt(boardArray[i * size + j + 1].innerHTML)
+      let leftVar = parseInt(boardArray[i * size + j].innerHTML)
+      if (rightVar == leftVar && rightVar != 0) {
+        boardArray[i * size + j].innerHTML = leftVar + rightVar
+        boardArray[i * size + j + 1].innerHTML = 0
+        j+=2
+      } else {
+        j++
       }
     }
   }
+}
 
-  let slideUp = () => {
-    // rotate board by 90deg clockwise and slide right
-    let rotatedBoardArray = rotateBoard()
-    for (let i = 0; i < size; i++) {
-      let row = []
-      for (let j = 0; j < size ; j++) {
-        row.push(rotatedBoardArray[i*size + j].innerHTML)
-      }
-      let filtered = row.filter(item => item > 0)
-      let remaining = size - filtered.length
-      let zeros = Array(remaining).fill(0)
-      let newRow = zeros.concat(filtered)
-      for (let j = 0; j < size ; j++) {
-        rotatedBoardArray[i*size + j].innerHTML = newRow[j]
+let slideUp = () => {
+  // rotate board by 90deg clockwise and slide right
+  let rotatedBoardArray = rotateBoard()
+  for (let i = 0; i < size; i++) {
+    let row = []
+    for (let j = 0; j < size ; j++) {
+      row.push(rotatedBoardArray[i*size + j].innerHTML)
+    }
+    let filtered = row.filter(item => item > 0)
+    let remaining = size - filtered.length
+    let zeros = Array(remaining).fill(0)
+    let newRow = zeros.concat(filtered)
+    for (let j = 0; j < size ; j++) {
+      rotatedBoardArray[i*size + j].innerHTML = newRow[j]
+    }
+  }
+}
+
+let combineUp = () => {
+  let rotatedBoardArray = rotateBoard()
+  for (let i = 0; i < size; i++) {
+    //traverse array from right to left
+    for (let j = size - 2; j >= 0;) {
+      let rightVar = parseInt(rotatedBoardArray[i * size + j + 1].innerHTML)
+      let leftVar = parseInt(rotatedBoardArray[i * size + j].innerHTML)
+      if (rightVar == leftVar) {
+        rotatedBoardArray[i * size + j + 1].innerHTML = leftVar + rightVar
+        rotatedBoardArray[i * size + j].innerHTML = 0
+        j -= 2
+      } else {
+        j--
       }
     }
   }
+}
 
-  let combineUp = () => {
-    let rotatedBoardArray = rotateBoard()
-    for (let i = 0; i < size; i++) {
-      //traverse array from right to left
-      for (let j = size - 2; j >= 0;) {
-        let rightVar = parseInt(rotatedBoardArray[i * size + j + 1].innerHTML)
-        let leftVar = parseInt(rotatedBoardArray[i * size + j].innerHTML)
-        if (rightVar == leftVar) {
-          rotatedBoardArray[i * size + j + 1].innerHTML = leftVar + rightVar
-          rotatedBoardArray[i * size + j].innerHTML = 0
-          j-=2
-        } else {
-          j--
-        }
+let slideDown = () => {
+  // rotate board by 90deg clockwise and slide left
+  let rotatedBoardArray = rotateBoard()
+  for (let i = 0; i < size; i++) {
+    let row = []
+    for (let j = 0; j < size ; j++) {
+      row.push(rotatedBoardArray[i*size + j].innerHTML)
+    }
+    let filtered = row.filter(item => item > 0)
+    let remaining = size - filtered.length
+    for (let i = 0; i < remaining; i++) {
+      filtered.push(0)
+    }
+    for (let j = 0; j < size ; j++) {
+      rotatedBoardArray[i*size + j].innerHTML = filtered[j]
+    }
+  }
+}
+
+let combineDown = () => {
+  let rotatedBoardArray = rotateBoard()
+  for (let i = 0; i < size; i++) {
+    //traverse array from left to right
+    for (let j = 0; j < size - 1;) {
+      let rightVar = parseInt(rotatedBoardArray[i * size + j + 1].innerHTML)
+      let leftVar = parseInt(rotatedBoardArray[i * size + j].innerHTML)
+      if (rightVar == leftVar) {
+        rotatedBoardArray[i * size + j].innerHTML = leftVar + rightVar
+        rotatedBoardArray[i * size + j + 1].innerHTML = 0
+        j+=2
+      } else {
+        j++
       }
     }
   }
+}
 
-  let slideDown = () => {
-    // rotate board by 90deg clockwise and slide left
-    let rotatedBoardArray = rotateBoard()
-    for (let i = 0; i < size; i++) {
-      let row = []
-      for (let j = 0; j < size ; j++) {
-        row.push(rotatedBoardArray[i*size + j].innerHTML)
-      }
-      let filtered = row.filter(item => item > 0)
-      let remaining = size - filtered.length
-      for (let i = 0; i < remaining; i++) {
-        filtered.push(0)
-      }
-      for (let j = 0; j < size ; j++) {
-        rotatedBoardArray[i*size + j].innerHTML = filtered[j]
+
+//rotate board 90 deg clockwise
+let rotateBoard = () => {
+  let rotatedBoardArray = []
+  for (let i = 0; i < size; i++) {
+    for (let j = size*size - 1; j >= 0; j--) {
+      if ((j-i) % size == 0) {
+        rotatedBoardArray.push(boardArray[j])
       }
     }
-  }
+  }   
+  return rotatedBoardArray
+}
 
-  let combineDown = () => {
-    let rotatedBoardArray = rotateBoard()
-    for (let i = 0; i < size; i++) {
-      //traverse array from left to right
-      for (let j = 0; j < size - 1;) {
-        let rightVar = parseInt(rotatedBoardArray[i * size + j + 1].innerHTML)
-        let leftVar = parseInt(rotatedBoardArray[i * size + j].innerHTML)
-        if (rightVar == leftVar) {
-          rotatedBoardArray[i * size + j].innerHTML = leftVar + rightVar
-          rotatedBoardArray[i * size + j + 1].innerHTML = 0
-          j+=2
-        } else {
-          j++
-        }
-      }
+let checkMoveMade = (beforeArray) => {
+  if (madeMove(beforeArray)) {
+    insertRandomTwo(boardArray)
+  } 
+  // else {
+  //   alert("Move is invalid")
+  // }
+}
+
+let madeMove = (beforeArray) => {
+  for (let i = 0; i < beforeArray.length; i++) {
+    if (beforeArray[i] != boardArray[i].innerHTML) {
+      return true
     }
   }
+  return false;
+}
 
-
-  //rotate board 90 deg clockwise
-  let rotateBoard = () => {
-    let rotatedBoardArray = []
-    for (let i = 0; i < size; i++) {
-      for (let j = size*size - 1; j >= 0; j--) {
-        if ((j-i) % size == 0) {
-          rotatedBoardArray.push(boardArray[j])
-        }
-      }
-    }   
-    return rotatedBoardArray
-  }
-
-  let checkMoveMade = (beforeArray) => {
-    if (madeMove(beforeArray)) {
-      insertRandomTwo(boardArray)
-    } else {
-      alert("Move is invalid")
-    }
-  }
-
-  let madeMove = (beforeArray) => {
-    for (let i = 0; i < beforeArray.length; i++) {
-      if (beforeArray[i] != boardArray[i].innerHTML) {
-        return true
-      }
-    }
-    return false;
-  }
-
-  let updateScore = () => {
-    let score = 0
-    boardArray.forEach(element => {
-      score += parseInt(element.innerHTML)
-    })
-    scoreBoard.innerHTML = score
-  }
+let updateScore = () => {
+  let score = 0
+  boardArray.forEach(element => {
+    score += parseInt(element.innerHTML)
+  })
+  scoreCounter.innerHTML = score
+}
 
 
 
 let addTileColors = () => {
-  console.log("test")
-  boardArray.forEach(item => {
-    let value = item.innerHTML
-    console.log(value)
-    switch (value) {
-      case "0":
-        item.style.color = "palegoldenrod";
-        item.style.background = "palegoldenrod";
-        break;
-      case "2":
-        item.style.color = "black";
-        item.style.background = "green";
-        break;
-      case "4":
-        item.style.color = "black";
-        item.style.background = "lightblue";
-        break;
-      case "8":
-        item.style.color = "black";
-        item.style.background = "orange";
-        break;
-      case "16":
-        item.style.color = "black";
-        item.style.background = "yellow";
-        break;
-      case "32":
-        item.style.color = "black";
-        item.style.background = "red";
-        break;
-      case "64":
-        item.style.color = "black";
-        item.style.background = "blue";
-        break;
-      default:
-        item.style.color = "black";
-        item.style.background = "white";
-        break;
-    }
-  })
+console.log("test")
+boardArray.forEach(item => {
+  let value = item.innerHTML
+  console.log(value)
+  switch (value) {
+    case "0":
+      item.style.color = "palegoldenrod";
+      item.style.background = "palegoldenrod";
+      break;
+    case "2":
+      item.style.color = "black";
+      item.style.background = "green";
+      break;
+    case "4":
+      item.style.color = "black";
+      item.style.background = "lightblue";
+      break;
+    case "8":
+      item.style.color = "black";
+      item.style.background = "orange";
+      break;
+    case "16":
+      item.style.color = "black";
+      item.style.background = "yellow";
+      break;
+    case "32":
+      item.style.color = "black";
+      item.style.background = "red";
+      break;
+    case "64":
+      item.style.color = "black";
+      item.style.background = "blue";
+      break;
+    default:
+      item.style.color = "black";
+      item.style.background = "white";
+      break;
+  }
+})
 }
 
-  
+
 
 
 //--------------------Main ----------------//
+document.addEventListener('DOMContentLoaded', () => {
   createStartingBoard()
   window.addEventListener('keydown', (e) => {
-     // copy a state of the board
+      // copy a state of the board
     let beforeArray = boardArray.map(item => item.innerHTML)
     // checkGameEnd()
     // check key direction and execute the move
@@ -321,15 +323,15 @@ let addTileColors = () => {
 
 
 // ----------------------------experimented code----------------------------------
-  // let slideLeft = () => {
-  //   for (let i = 0; i < size; i++) {
-  //    for (let j = size - 2; j >= 0 ; j--) {
-  //      let rightVar = boardArray[i*size + j + 1].innerHTML
-  //      let leftVar = boardArray[i*size + j].innerHTML
-  //      if (leftVar == 0) {
-  //       boardArray[i*size + j].innerHTML = rightVar 
-  //       boardArray[i*size + j + 1].innerHTML = 0
-  //      }
-  //    }
-  //   }
-  // }
+// let slideLeft = () => {
+//   for (let i = 0; i < size; i++) {
+//    for (let j = size - 2; j >= 0 ; j--) {
+//      let rightVar = boardArray[i*size + j + 1].innerHTML
+//      let leftVar = boardArray[i*size + j].innerHTML
+//      if (leftVar == 0) {
+//       boardArray[i*size + j].innerHTML = rightVar 
+//       boardArray[i*size + j + 1].innerHTML = 0
+//      }
+//    }
+//   }
+// }

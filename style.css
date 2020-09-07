@@ -1,8 +1,14 @@
-.col {
+/* .col {
   background: palegoldenrod;
   border: 1px solid black;
+} */
+#gameBoard {
+  background: palegoldenrod;
+  padding: 0;
 }
+
 .box {
   text-align: center;
   font-size: 5rem;
+  border: 1px solid black;
 }
