@@ -1,14 +1,10 @@
-/* .col {
-  background: palegoldenrod;
-  border: 1px solid black;
-} */
 #gameBoard {
-  background: palegoldenrod;
+  background: #577590;
   padding: 0;
 }
 
 .box {
   text-align: center;
-  font-size: 5rem;
+  font-size: 5em;
   border: 1px solid black;
 }

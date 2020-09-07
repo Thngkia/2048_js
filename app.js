@@ -1,16 +1,15 @@
-
 let gameDisplay = document.getElementById("gameBoard")
+let scoreCounter = document.getElementById("score-counter")
 let size = 4
 let boardArray = []
-let scoreCounter = document.getElementById("score-counter")
 
+// This is to create the starting game, which consists of a gameboard, 2 random numbers and the color of the tiles
 let createStartingBoard = () => {
   gameBoard(size)
   insertRandomTwoOrFour(boardArray);
   insertRandomTwoOrFour(boardArray);
   addTileColors()
 }
-
 
 let gameBoard = (size) => {
   let container = document.createElement("div")
@@ -21,6 +20,7 @@ let gameBoard = (size) => {
     rowDiv.classList.add("row", "row-" + i)
     for (let j = 0; j < size; j++) {
       let box = document.createElement("div")
+
       box.classList.add("col", "box", "column-" + j)
       box.setAttribute("id", "box-" + (i*(size) + j) )
       box.innerHTML += 0
@@ -216,9 +216,6 @@ let checkMoveMade = (beforeArray) => {
   if (madeMove(beforeArray)) {
     insertRandomTwo(boardArray)
   } 
-  // else {
-  //   alert("Move is invalid")
-  // }
 }
 
 let madeMove = (beforeArray) => {
@@ -235,7 +232,7 @@ let updateScore = () => {
   boardArray.forEach(element => {
     score += parseInt(element.innerHTML)
   })
-  scoreCounter.innerHTML = score
+  scoreCounter.innerHTML = Math.round(score ** 1.5)
 }
 
 
@@ -247,36 +244,36 @@ boardArray.forEach(item => {
   console.log(value)
   switch (value) {
     case "0":
-      item.style.color = "palegoldenrod";
-      item.style.background = "palegoldenrod";
+      item.style.color = "#577590";
+      item.style.background = "#577590";
       break;
     case "2":
       item.style.color = "black";
-      item.style.background = "green";
+      item.style.background = "#43aa8b";
       break;
     case "4":
       item.style.color = "black";
-      item.style.background = "lightblue";
+      item.style.background = "#90be6d";
       break;
     case "8":
       item.style.color = "black";
-      item.style.background = "orange";
+      item.style.background = "#f9c74f";
       break;
     case "16":
       item.style.color = "black";
-      item.style.background = "yellow";
+      item.style.background = "#f8961e";
       break;
     case "32":
       item.style.color = "black";
-      item.style.background = "red";
+      item.style.background = "#f3722c";
       break;
     case "64":
       item.style.color = "black";
-      item.style.background = "blue";
+      item.style.background = "#ce6a85";
       break;
     default:
       item.style.color = "black";
-      item.style.background = "white";
+      item.style.background = "#e13a3c";
       break;
   }
 })
@@ -285,11 +282,11 @@ boardArray.forEach(item => {
 
 
 
-//--------------------Main ----------------//
+// Main functions
 document.addEventListener('DOMContentLoaded', () => {
   createStartingBoard()
   window.addEventListener('keydown', (e) => {
-      // copy a state of the board
+    // copy a state of the board
     let beforeArray = boardArray.map(item => item.innerHTML)
     // checkGameEnd()
     // check key direction and execute the move
@@ -316,7 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     updateScore()
     addTileColors()
-    
   })
 })
 
