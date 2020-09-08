@@ -9,6 +9,7 @@ let createStartingBoard = () => {
   insertRandomTwoOrFour(boardArray);
   insertRandomTwoOrFour(boardArray);
   addTileColors()
+  updateHighScore()
 }
 
 let gameBoard = (size) => {
@@ -232,21 +233,26 @@ let updateScore = () => {
   boardArray.forEach(element => {
     score += parseInt(element.innerHTML)
   })
-  scoreCounter.innerHTML = Math.round(score ** 1.5)
-  if(window.localStorage.score < score) {
-    window.localStorage.score = score
-    updateHighScore(score)
-  }
+  score = Math.round(score ** 1.3)
+  scoreCounter.innerHTML = score
+  updateHighScore(score)
 }
 
 let updateHighScore = (score) => {
-  document.querySelector("#high-score").innerHTML = score
+  let highScore = localStorage.getItem("highScore")
+  if(highScore !== null) {
+    if (score > highScore) {
+        localStorage.setItem("highScore", score);      
+    } 
+  } else {
+    localStorage.setItem("highScore", score);
+  }
+  document.querySelector("#high-score").innerHTML = highScore
 }
 
 let addTileColors = () => {
 boardArray.forEach(item => {
   let value = item.innerHTML
-  console.log(value)
   switch (value) {
     case "0":
       item.style.color = "#577590";
@@ -290,10 +296,17 @@ document.querySelector("#reset-button").addEventListener("click", (e) => {
   location.reload()
 })
 
+document.querySelector("#reset-high-score").addEventListener("click", (e) => {
+  localStorage.setItem("highScore", 0)
+  location.reload()
+})
+
+
 
 // Main functions
 document.addEventListener('DOMContentLoaded', () => {
   createStartingBoard()
+  
   window.addEventListener('keydown', (e) => {
     // copy a state of the board
     let beforeArray = boardArray.map(item => item.innerHTML)
@@ -321,6 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
       checkMoveMade(beforeArray)
     }
     updateScore()
+    updateHighScore()
     addTileColors()
   })
 })

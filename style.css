@@ -4,9 +4,6 @@ body {
 header {
   text-align: center;
 }
-.row {
-  
-}
 
 .box {
   text-align: center;
@@ -24,12 +21,9 @@ header {
 
 
 #score-board {
-  background: #faf3dd;
-  border: 2px solid black;
+  background: #dbe3e5;
+  border: 2px solid #dbe3e5;
   border-radius: 0 2rem 2rem 0;
 }
 
 
-#score-counter {
-
-}
