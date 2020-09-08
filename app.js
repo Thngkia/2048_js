@@ -244,7 +244,9 @@ let updateHighScore = (score) => {
     if (score > highScore) {
         localStorage.setItem("highScore", score);      
     } 
-  } else {
+  } else if (highScore == undefined) {
+    localStorage.setItem("highScore", 0);
+    } else {
     localStorage.setItem("highScore", score);
   }
   document.querySelector("#high-score").innerHTML = highScore
