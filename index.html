@@ -14,12 +14,25 @@
 
   <body>
     <div class="container">
-      <div id="score-board">
-        <h2>Score</h2>      
-        <div id="score-counter"></div>
+      <header>
+        <h1 class="display-1">2048</h1>
+      </header>
+
+      <div class="row" id="game-space">
+        <div class="container col-8" id="gameBoard"></div>
+        <div class="col-4"id="score-board">
+          <div class="row">
+            <h1 class="col-4">Score:</h1>      
+            <div class="h1 col-4" id="score-counter"></div>
+            <div class="h1 col-4" id="high-score"></div>
+          </div>
+          
+          <button type="button" class="btn btn btn-warning btn-block" id="reset-button">Reset game</button>
+        </div>
+        
       </div>
-      <div class="container" id="gameBoard">
     </div>
+    
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

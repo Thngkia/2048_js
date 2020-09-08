@@ -1,10 +1,35 @@
-#gameBoard {
-  background: #577590;
-  padding: 0;
+body {
+  background: #faf3dd;
+}
+header {
+  text-align: center;
+}
+.row {
+  
 }
 
 .box {
   text-align: center;
   font-size: 5em;
-  border: 1px solid black;
+  border: 10px solid #16213e;
+  border-radius: 2rem
+}
+
+#gameBoard {
+  padding: 5px;
+  background:#16213e;
+  border: 2px solid #16213e;
+  border-radius: 2rem 0 0 2rem;
+}
+
+
+#score-board {
+  background: #faf3dd;
+  border: 2px solid black;
+  border-radius: 0 2rem 2rem 0;
+}
+
+
+#score-counter {
+
 }

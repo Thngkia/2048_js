@@ -233,12 +233,17 @@ let updateScore = () => {
     score += parseInt(element.innerHTML)
   })
   scoreCounter.innerHTML = Math.round(score ** 1.5)
+  if(window.localStorage.score < score) {
+    window.localStorage.score = score
+    updateHighScore(score)
+  }
 }
 
-
+let updateHighScore = (score) => {
+  document.querySelector("#high-score").innerHTML = score
+}
 
 let addTileColors = () => {
-console.log("test")
 boardArray.forEach(item => {
   let value = item.innerHTML
   console.log(value)
@@ -279,7 +284,11 @@ boardArray.forEach(item => {
 })
 }
 
-
+//Game sidebar functions
+// reset game 
+document.querySelector("#reset-button").addEventListener("click", (e) => {
+  location.reload()
+})
 
 
 // Main functions
@@ -315,6 +324,23 @@ document.addEventListener('DOMContentLoaded', () => {
     addTileColors()
   })
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
