@@ -292,7 +292,7 @@ boardArray.forEach(item => {
 })
 }
 
-//Game sidebar functions
+////Game sidebar functions
 // reset game 
 document.querySelector("#reset-button").addEventListener("click", (e) => {
   location.reload()
@@ -302,6 +302,65 @@ document.querySelector("#reset-high-score").addEventListener("click", (e) => {
   localStorage.setItem("highScore", 0)
   location.reload()
 })
+
+////Game over functions
+let gameOver = () => {
+  document.querySelector("#game-over-text p").innerHTML += scoreCounter.innerHTML
+  window.addEventListener("keydown", (e) => {
+    e.stopPropagation()
+  }, true)
+  $("#game-over-modal").modal("toggle")
+}
+
+let checkGameOver = () => {
+  // if no more moves, game is over
+  // check if there is empty boxes on teh board 
+  // search for adjacent boxes if there is same number
+
+  // build matrix
+  let matrix = []
+  for (let i = 0; i < size; i++) {
+    let row = []
+    for (let j = 0; j < size; j++) {
+      row.push(boardArray[i * size + j].innerHTML)
+    }
+    matrix.push(row)
+  }
+  console.log(matrix)
+
+  // check for "0"
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      if (matrix[i][j] === "0") {
+        return false
+      }
+    }
+  }
+  
+  // add event listener to modal
+  document.querySelector("#game-over-reset").addEventListener("click", () => {
+    location.reload()
+  })
+
+  // check if left and right boxes are equal -> compare center columns with left and right
+  for (let i = 0; i < size; i++) {
+    for (let j = 1; j < size - 1; j++) {
+      if (matrix[i][j] === matrix[i][j - 1] || matrix[i][j] === matrix[i][j + 1]) {
+        return false
+      }
+    }
+  }
+  // check if top and bottom are equal -> compare center rows with top and bottom
+  for (let i = 1; i < size - 1; i++) {
+    for (let j = 0; j < size ; j++) {
+      if (matrix[i][j] === matrix[i - 1][j] || matrix[i][j] === matrix[i + 1][j]) {
+        return false
+      }
+    }
+  }
+  console.log("fail")
+  return true
+}
 
 
 
@@ -335,9 +394,15 @@ document.addEventListener('DOMContentLoaded', () => {
       slideDown()
       checkMoveMade(beforeArray)
     }
+
     updateScore()
     updateHighScore()
     addTileColors()
+
+    if (checkGameOver()) {
+      gameOver()
+    }
+
   })
 })
 
