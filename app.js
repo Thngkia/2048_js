@@ -147,10 +147,11 @@ let slideUp = () => {
     }
     let filtered = row.filter(item => item > 0)
     let remaining = size - filtered.length
-    let zeros = Array(remaining).fill(0)
-    let newRow = zeros.concat(filtered)
+    for (let j = 0; j < remaining; j++) {
+      filtered.unshift(0) 
+    }
     for (let j = 0; j < size ; j++) {
-      rotatedBoardArray[i*size + j].innerHTML = newRow[j]
+      rotatedBoardArray[i*size + j].innerHTML = filtered[j]
       // changing animation classes
       rotatedBoardArray[i*size + j].classList.add("box-transition")
       if (filtered[j] == 0) {
