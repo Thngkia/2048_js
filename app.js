@@ -154,7 +154,7 @@ let slideUp = () => {
       // changing animation classes
       rotatedBoardArray[i*size + j].classList.add("box-transition")
       if (filtered[j] == 0) {
-        boardArray[i*size + j].classList.remove("box-transition")
+        rotatedBoardArray[i*size + j].classList.remove("box-transition")
       }
     }
   }
