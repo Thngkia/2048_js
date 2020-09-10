@@ -21,8 +21,7 @@ let gameBoard = (size) => {
     rowDiv.classList.add("row", "row-" + i)
     for (let j = 0; j < size; j++) {
       let box = document.createElement("div")
-
-      box.classList.add("col", "box", "column-" + j)
+      box.classList.add("col", "box", "column-" + j, "box-transition")
       box.setAttribute("id", "box-" + (i*(size) + j) )
       box.innerHTML += 0
       rowDiv.append(box)
@@ -41,6 +40,7 @@ let insertRandomTwoOrFour = (boardArray) => {
   // insert to board if there is space
   if (boardArray[random].innerHTML == 0) {
     boardArray[random].innerHTML = randomNum
+    boardArray[random].classList.add("box-transition")
     return
   } else {
     insertRandomTwoOrFour(boardArray)
@@ -53,6 +53,7 @@ let insertRandomTwo = (boardArray) => {
   // insert to board if there is space
   if (boardArray[random].innerHTML == 0) {
     boardArray[random].innerHTML = 2
+    boardArray[random].classList.add("box-transition")
     return
   } else {
     insertRandomTwo(boardArray)
@@ -67,11 +68,16 @@ let slideRight = () => {
     }
     let filtered = row.filter(item => item > 0)
     let remaining = size - filtered.length
-    for (let i = 0; i < remaining; i++) {
+    for (let j = 0; j < remaining; j++) {
       filtered.unshift(0) 
     }
     for (let j = 0; j < size ; j++) {
       boardArray[i*size + j].innerHTML = filtered[j]
+      // changing animation classes
+      boardArray[i*size + j].classList.add("box-transition")
+      if (filtered[j] == 0) {
+        boardArray[i*size + j].classList.remove("box-transition")
+      }
     }
   }
 }
@@ -101,11 +107,16 @@ let slideLeft = () => {
     }
     let filtered = row.filter(item => item > 0)
     let remaining = size - filtered.length
-    for (let i = 0; i < remaining; i++) {
+    for (let j = 0; j < remaining; j++) {
       filtered.push(0)
     }
     for (let j = 0; j < size ; j++) {
       boardArray[i*size + j].innerHTML = filtered[j]
+      // changing animation classes
+      boardArray[i*size + j].classList.add("box-transition")
+      if (filtered[j] == 0) {
+        boardArray[i*size + j].classList.remove("box-transition")
+      }
     }
   }
 }
@@ -140,6 +151,11 @@ let slideUp = () => {
     let newRow = zeros.concat(filtered)
     for (let j = 0; j < size ; j++) {
       rotatedBoardArray[i*size + j].innerHTML = newRow[j]
+      // changing animation classes
+      rotatedBoardArray[i*size + j].classList.add("box-transition")
+      if (filtered[j] == 0) {
+        boardArray[i*size + j].classList.remove("box-transition")
+      }
     }
   }
 }
@@ -172,11 +188,18 @@ let slideDown = () => {
     }
     let filtered = row.filter(item => item > 0)
     let remaining = size - filtered.length
-    for (let i = 0; i < remaining; i++) {
+    for (let j = 0; j < remaining; j++) {
       filtered.push(0)
     }
     for (let j = 0; j < size ; j++) {
       rotatedBoardArray[i*size + j].innerHTML = filtered[j]
+      // changing animation classes
+      rotatedBoardArray[i*size + j].classList.add("box-transition")
+      if (filtered[j] == 0) { 
+        // console.log(boardArray[i*size + j].classList)
+        rotatedBoardArray[i*size + j].classList.remove("box-transition")
+        // console.log(boardArray[i*size + j].classList)
+      }
     }
   }
 }
@@ -214,7 +237,7 @@ let rotateBoard = () => {
 }
 
 let checkMoveMade = (beforeArray) => {
-  if (madeMove(beforeArray)) {
+  if (madeMove(beforeArray)) { 
     insertRandomTwo(boardArray)
   } 
 }
@@ -257,7 +280,7 @@ boardArray.forEach(item => {
   let value = item.innerHTML
   switch (value) {
     case "0":
-      item.style.color = "#577590";
+      item.style.color = "transparent";
       item.style.background = "#577590";
       break;
     case "2":
@@ -326,7 +349,6 @@ let checkGameOver = () => {
     }
     matrix.push(row)
   }
-  console.log(matrix)
 
   // check for "0"
   for (let i = 0; i < size; i++) {
@@ -358,7 +380,6 @@ let checkGameOver = () => {
       }
     }
   }
-  console.log("fail")
   return true
 }
 

@@ -10,7 +10,12 @@ header {
   text-align: center;
   font-size: 5em;
   border: 10px solid #16213e;
-  border-radius: 2rem
+  border-radius: 2rem;
+  
+}
+
+.box-transition {
+  transition: 0.3s;
 }
 
 #gameBoard {
@@ -27,5 +32,18 @@ header {
   border-radius: 0 2rem 2rem 0;
 }
 
+/* .left-transition {
+  animation-duration: 0s;
+  animation-name: slidein;
+} */
 
+/* @keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%; 
+  }
 
+  to {
+    margin-left: 0%;
+    width: 100%;
+  } */
