@@ -196,9 +196,7 @@ let slideDown = () => {
       // changing animation classes
       rotatedBoardArray[i*size + j].classList.add("box-transition")
       if (filtered[j] == 0) { 
-        // console.log(boardArray[i*size + j].classList)
         rotatedBoardArray[i*size + j].classList.remove("box-transition")
-        // console.log(boardArray[i*size + j].classList)
       }
     }
   }
