@@ -14,10 +14,6 @@ header {
   
 }
 
-.box-transition {
-  transition: 0.3s;
-}
-
 #gameBoard {
   padding: 5px;
   background:#16213e;
@@ -32,18 +28,70 @@ header {
   border-radius: 0 2rem 2rem 0;
 }
 
-/* .left-transition {
-  animation-duration: 0s;
-  animation-name: slidein;
-} */
+/* animations */
+.box-transition {
+  transition: 0.1s;
+}
+.box-slide-right {
+  animation-duration: 0.1s;
+  animation-name: slide-right;
+}
 
-/* @keyframes slidein {
-  from {
-    margin-left: 100%;
-    width: 300%; 
-  }
+.box-slide-left {
+  animation-duration: 0.1s;
+  animation-name: slide-left;
+}
 
-  to {
-    margin-left: 0%;
-    width: 100%;
-  } */
+.box-slide-up {
+  animation-duration: 0.1s;
+  animation-name: slide-up;
+}
+
+.box-slide-down {
+  animation-duration: 0.1s;
+  animation-name: slide-down;
+}
+
+@keyframes slide-right {
+  0% {
+    opacity: 0.9;
+    transform: translateX(-1px);
+ }
+ 100% {
+    opacity: 1;
+    transform: translateX(0);
+ }
+}
+
+@keyframes slide-left {
+  0% {
+    opacity: 0.9;
+    transform: translateX(1px);
+ }
+ 100% {
+    opacity: 1;
+    transform: translateX(0);
+ }
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 0.9;
+    transform: translateY(-1px);
+ }
+ 100% {
+    opacity: 1;
+    transform: translateY(0);
+ }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0.9;
+    transform: translateY(1px);
+ }
+ 100% {
+    opacity: 1;
+    transform: translateY(0);
+ }
+}

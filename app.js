@@ -74,9 +74,13 @@ let slideRight = () => {
     for (let j = 0; j < size ; j++) {
       boardArray[i*size + j].innerHTML = filtered[j]
       // changing animation classes
-      boardArray[i*size + j].classList.add("box-transition")
+      // boardArray[i*size + j].classList.remove("box-slide-right")
+      //boardArray[i*size + j].classList.remove("box-slide-up", "box-slide-down", "box-slide-left")
+      
       if (filtered[j] == 0) {
-        boardArray[i*size + j].classList.remove("box-transition")
+        boardArray[i*size + j].classList.remove("box-transition", "box-slide-right")
+      } else {
+        boardArray[i*size + j].classList.add("box-transition", "box-slide-right")
       }
     }
   }
@@ -113,9 +117,12 @@ let slideLeft = () => {
     for (let j = 0; j < size ; j++) {
       boardArray[i*size + j].innerHTML = filtered[j]
       // changing animation classes
-      boardArray[i*size + j].classList.add("box-transition")
+      //boardArray[i*size + j].classList.remove("box-slide-up", "box-slide-down", "box-slide-right")
+      // boardArray[i*size + j].classList.add("box-transition", "box-slide-left")
       if (filtered[j] == 0) {
-        boardArray[i*size + j].classList.remove("box-transition")
+        boardArray[i*size + j].classList.remove("box-transition", "box-slide-left")
+      } else {
+        boardArray[i*size + j].classList.add("box-transition", "box-slide-left")
       }
     }
   }
@@ -153,9 +160,12 @@ let slideUp = () => {
     for (let j = 0; j < size ; j++) {
       rotatedBoardArray[i*size + j].innerHTML = filtered[j]
       // changing animation classes
-      rotatedBoardArray[i*size + j].classList.add("box-transition")
+      //boardArray[i*size + j].classList.remove("box-slide-down", "box-slide-left", "box-slide-right")
+      // rotatedBoardArray[i*size + j].classList.add("box-transition", "box-slide-up")
       if (filtered[j] == 0) {
-        rotatedBoardArray[i*size + j].classList.remove("box-transition")
+        rotatedBoardArray[i*size + j].classList.remove("box-transition", "box-slide-up")
+      } else {
+        boardArray[i*size + j].classList.add("box-transition", "box-slide-up")
       }
     }
   }
@@ -195,9 +205,12 @@ let slideDown = () => {
     for (let j = 0; j < size ; j++) {
       rotatedBoardArray[i*size + j].innerHTML = filtered[j]
       // changing animation classes
-      rotatedBoardArray[i*size + j].classList.add("box-transition")
+      //boardArray[i*size + j].classList.remove("box-slide-up", "box-slide-left", "box-slide-right")
+      // rotatedBoardArray[i*size + j].classList.add("box-transition", "box-slide-down")
       if (filtered[j] == 0) { 
-        rotatedBoardArray[i*size + j].classList.remove("box-transition")
+        rotatedBoardArray[i*size + j].classList.remove("box-transition", "box-slide-down")
+      } else {
+        boardArray[i*size + j].classList.add("box-transition", "box-slide-down")
       }
     }
   }
