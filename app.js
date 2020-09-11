@@ -295,32 +295,82 @@ boardArray.forEach(item => {
   let value = item.innerHTML
   switch (value) {
     case "0":
+      item.style.fontSize = "5em"
+      item.style.paddingTop = "0"
       item.style.color = "transparent";
       item.style.background = "#577590";
       break;
     case "2":
+      item.style.fontSize = "5em"
+      item.style.paddingTop = "0"
       item.style.color = "black";
       item.style.background = "#43aa8b";
       break;
     case "4":
+      item.style.fontSize = "5em"
+      item.style.paddingTop = "0"
       item.style.color = "black";
       item.style.background = "#90be6d";
       break;
     case "8":
+      item.style.fontSize = "5em"
+      item.style.paddingTop = "0"
       item.style.color = "black";
       item.style.background = "#f9c74f";
       break;
     case "16":
+      item.style.fontSize = "5em"
+      item.style.paddingTop = "0"
       item.style.color = "black";
       item.style.background = "#f8961e";
       break;
     case "32":
+      item.style.fontSize = "5em"
+      item.style.paddingTop = "0"
       item.style.color = "black";
       item.style.background = "#f3722c";
       break;
     case "64":
+      item.style.fontSize = "5em"
+      item.style.paddingTop = "0"
       item.style.color = "black";
       item.style.background = "#ce6a85";
+      break;
+    case "128":
+      item.style.fontSize = "5em"
+      item.style.paddingTop = "0"
+      item.style.color = "black";
+      item.style.background = "#e13a3c";
+    break;
+    case "256":
+      item.style.fontSize = "5em"
+      item.style.paddingTop = "0"
+      item.style.color = "black";
+      item.style.background = "#e13a3c";
+      break;
+    case "512":
+      item.style.fontSize = "5em"
+      item.style.paddingTop = "0"
+      item.style.color = "black";
+      item.style.background = "#e13a3c";
+      break;
+    case "1024":
+      item.style.fontSize = "3em"
+      item.style.paddingTop = "3%"
+      item.style.color = "black";
+      item.style.background = "#e13a3c";
+      break;
+    case "2048":
+      item.style.fontSize = "3em"
+      item.style.paddingTop = "3%"
+      item.style.color = "black";
+      item.style.background = "#e13a3c";
+      break;
+    case "4096":
+      item.style.fontSize = "3em"
+      item.style.paddingTop = "3%"
+      item.style.color = "black";
+      item.style.background = "#e13a3c";
       break;
     default:
       item.style.color = "black";
