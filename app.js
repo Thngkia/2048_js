@@ -1,7 +1,7 @@
-let gameDisplay = document.getElementById("gameBoard")
-let scoreCounter = document.getElementById("score-counter")
-let size = 4
-let boardArray = []
+var gameDisplay = document.getElementById("gameBoard")
+var scoreCounter = document.getElementById("score-counter")
+var size = 4
+var boardArray = []
 
 // This is to create the starting game, which consists of a gameboard, 2 random numbers and the color of the tiles
 let createStartingBoard = () => {
@@ -251,7 +251,10 @@ let rotateBoard = () => {
 let checkMoveMade = (beforeArray) => {
   if (madeMove(beforeArray)) { 
     insertRandomTwo(boardArray)
-  } 
+    return true
+  } else {
+    return false
+  }
 }
 
 let madeMove = (beforeArray) => {
@@ -349,7 +352,7 @@ let gameOver = () => {
 
 let checkGameOver = () => {
   // if no more moves, game is over
-  // check if there is empty boxes on teh board 
+  // check if there is empty boxes on the board 
   // search for adjacent boxes if there is same number
 
   // build matrix
@@ -395,32 +398,29 @@ let checkGameOver = () => {
   return true
 }
 
-let executeRight = (beforeArray) => {
+let executeRight = () => {
   slideRight()
   combineRight()
   slideRight()
-  checkMoveMade(beforeArray)
+
 }
 
-let executeLeft = (beforeArray) => {
+let executeLeft = () => {
   slideLeft()
   combineLeft()
   slideLeft()
-  checkMoveMade(beforeArray)
 }
 
-let executeUp = (beforeArray) => {
+let executeUp = () => {
   slideUp()
   combineUp()
   slideUp()
-  checkMoveMade(beforeArray)
 }
 
-let executeDown = (beforeArray) => {
+let executeDown = () => {
   slideDown()
   combineDown()
   slideDown()
-  checkMoveMade(beforeArray)
 }
 
 
@@ -434,13 +434,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // checkGameEnd()
     // check key direction and execute the move
     if (e.key == 'ArrowRight') {
-      executeRight(beforeArray)
+      executeRight()
+      checkMoveMade(beforeArray)
     } else if (e.key == 'ArrowLeft') {
-      executeLeft(beforeArray)
+      executeLeft()
+      checkMoveMade(beforeArray)
     } else if (e.key == 'ArrowUp') {
-      executeUp(beforeArray)
+      executeUp()
+      checkMoveMade(beforeArray)
     } else if (e.key == 'ArrowDown') {
-      executeDown(beforeArray)
+      executeDown()
+      checkMoveMade(beforeArray)
     }
 
     updateScore()

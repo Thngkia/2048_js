@@ -54,7 +54,7 @@ header {
 
 @keyframes slide-right {
   0% {
-    opacity: 0.9;
+    opacity: 0.99;
     transform: translateX(-1px);
  }
  100% {
@@ -65,7 +65,7 @@ header {
 
 @keyframes slide-left {
   0% {
-    opacity: 0.9;
+    opacity: 0.99;
     transform: translateX(1px);
  }
  100% {
@@ -76,7 +76,7 @@ header {
 
 @keyframes slide-down {
   0% {
-    opacity: 0.9;
+    opacity: 0.99;
     transform: translateY(-1px);
  }
  100% {
@@ -87,7 +87,7 @@ header {
 
 @keyframes slide-up {
   0% {
-    opacity: 0.9;
+    opacity: 0.99;
     transform: translateY(1px);
  }
  100% {
