@@ -395,6 +395,33 @@ let checkGameOver = () => {
   return true
 }
 
+let executeRight = (beforeArray) => {
+  slideRight()
+  combineRight()
+  slideRight()
+  checkMoveMade(beforeArray)
+}
+
+let executeLeft = (beforeArray) => {
+  slideLeft()
+  combineLeft()
+  slideLeft()
+  checkMoveMade(beforeArray)
+}
+
+let executeUp = (beforeArray) => {
+  slideUp()
+  combineUp()
+  slideUp()
+  checkMoveMade(beforeArray)
+}
+
+let executeDown = (beforeArray) => {
+  slideDown()
+  combineDown()
+  slideDown()
+  checkMoveMade(beforeArray)
+}
 
 
 // Main functions
@@ -407,25 +434,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // checkGameEnd()
     // check key direction and execute the move
     if (e.key == 'ArrowRight') {
-      slideRight()
-      combineRight()
-      slideRight()
-      checkMoveMade(beforeArray)
+      executeRight(beforeArray)
     } else if (e.key == 'ArrowLeft') {
-      slideLeft()
-      combineLeft()
-      slideLeft()
-      checkMoveMade(beforeArray)
+      executeLeft(beforeArray)
     } else if (e.key == 'ArrowUp') {
-      slideUp()
-      combineUp()
-      slideUp()
-      checkMoveMade(beforeArray)
+      executeUp(beforeArray)
     } else if (e.key == 'ArrowDown') {
-      slideDown()
-      combineDown()
-      slideDown()
-      checkMoveMade(beforeArray)
+      executeDown(beforeArray)
     }
 
     updateScore()
