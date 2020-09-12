@@ -95,7 +95,7 @@ let combineRight = () => {
         boardArray[i * size + j + 1].innerHTML = leftVar + rightVar
         boardArray[i * size + j].innerHTML = 0
         score += (leftVar +rightVar)
-        console.log(score)
+        // console.log(score)
         j-=2
       } else {
         j--
@@ -135,7 +135,7 @@ let combineLeft = () => {
         boardArray[i * size + j].innerHTML = leftVar + rightVar
         boardArray[i * size + j + 1].innerHTML = 0
         score += (leftVar +rightVar)
-        console.log(score)
+        // console.log(score)
         j+=2
       } else {
         j++
@@ -178,8 +178,8 @@ let combineUp = () => {
       if (rightVar == leftVar) {
         rotatedBoardArray[i * size + j + 1].innerHTML = leftVar + rightVar
         rotatedBoardArray[i * size + j].innerHTML = 0
-        score += (leftVar +rightVar)
-        console.log(score)
+        score += (leftVar + rightVar)
+        // console.log(score)
         j -= 2
       } else {
         j--
@@ -242,7 +242,7 @@ let rotateBoard = () => {
         rotatedBoardArray.push(boardArray[j])
       }
     }
-  }   
+  }
   return rotatedBoardArray
 }
 
@@ -283,15 +283,15 @@ boardArray.forEach(item => {
     case "0":
       item.style.fontSize = "5em"
       item.style.paddingTop = "0"
-      item.style.color = "transparent";
-      item.style.background = "#577590";
-      break;
+      item.style.color = "transparent"
+      item.style.background = "#577590"
+      break
     case "2":
       item.style.fontSize = "5em"
       item.style.paddingTop = "0"
-      item.style.color = "black";
-      item.style.background = "#43aa8b";
-      break;
+      item.style.color = "black"
+      item.style.background = "#43aa8b"
+      break
     case "4":
       item.style.fontSize = "5em"
       item.style.paddingTop = "0"
