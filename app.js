@@ -400,11 +400,7 @@ let gameOver = () => {
   $("#game-over-modal").modal("toggle")
 }
 
-let checkGameOver = () => {
-  // if no more moves, game is over
-  // check if there is empty boxes on the board 
-  // search for adjacent boxes if there is same number
-
+let buildMatrix = () => {
   // build matrix
   let matrix = []
   for (let i = 0; i < size; i++) {
@@ -414,14 +410,29 @@ let checkGameOver = () => {
     }
     matrix.push(row)
   }
+  return matrix
+}
 
-  // check for "0"
+let checkZero = (matrix) => {
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
       if (matrix[i][j] === "0") {
-        return false
+        return true
       }
     }
+  }
+  return false
+}
+
+let checkGameOver = () => {
+  // if no more moves, game is over
+  // check if there is empty boxes on the board 
+  // search for adjacent boxes if there is same number
+  
+  let matrix = buildMatrix()
+  let zeroPresent = checkZero(matrix)
+  if (zeroPresent) {
+    return false
   }
   
   // add event listener to modal
@@ -485,22 +496,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // check key direction and execute the move
     if (e.key == 'ArrowRight') {
       executeRight()
-      checkMoveMade(beforeArray)
+      // checkMoveMade(beforeArray)
     } else if (e.key == 'ArrowLeft') {
       executeLeft()
-      checkMoveMade(beforeArray)
+      // checkMoveMade(beforeArray)
     } else if (e.key == 'ArrowUp') {
       executeUp()
-      checkMoveMade(beforeArray)
+      // checkMoveMade(beforeArray)
     } else if (e.key == 'ArrowDown') {
       executeDown()
-      checkMoveMade(beforeArray)
+      // checkMoveMade(beforeArray)
     }
 
+    checkMoveMade(beforeArray)
     updateScore()
     updateHighScore()
     addTileColors()
-
+    console.log("testing")
     if (checkGameOver()) {
       gameOver()
     }
