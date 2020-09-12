@@ -1,64 +1,69 @@
+let possibleScore = 0;
+let counterTwo = 1
+
 document.querySelector("#advanced-ai").addEventListener("click", (e) => {
   function sleepTwo(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  async function demoTwo() {
+  async function asyncfunc() {
     // Sleep in loop
     while (!botGameOver) {
       advancedSteps();
       await sleepTwo(100);
     }
   }
-  demoTwo();
+  asyncfunc();
 });
 
-let possibleScore = 0;
 
 let advancedSteps = () => {
   let beforeArray = boardArray.map((item) => parseInt(item.innerHTML));
   //build rotated matrix
   let rotatedBeforeArray = rotateMatrix(beforeArray);
+
+  // hard code to combine the values right and then up 
+  let tempArr = beforeArray.slice(0, 4)
+  let inlusiveOfZero = tempArr.includes(0)
+  let haveDuplicates = new Set(tempArr).size !== tempArr.length
+  // do it under these conditions
+  if(counterTwo % 5 == 0 && counterTwo > 100 && !inlusiveOfZero && !haveDuplicates) {
+    executeRight()
+    executeUp()
+  }
+  // more conditions as the value gets larger
+  if(beforeArray[0] > 500 && beforeArray[7] == 0 && !inlusiveOfZero && !haveDuplicates) {
+    executeRight()
+    executeUp()
+  }
+
   let scoreProjection = [];
   // check score of all directions
-  scoreProjection[0] = scoreLeft(beforeArray);
-  scoreProjection[1] = scoreRight(beforeArray);
-  scoreProjection[2] = scoreUp(rotatedBeforeArray);
-  scoreProjection[3] = scoreDown(rotatedBeforeArray);
+  scoreProjection[0] = scoreLeft(beforeArray)
+  scoreProjection[1] = 0
+  scoreProjection[2] = scoreUp(rotatedBeforeArray)
+  scoreProjection[3] = scoreDown(rotatedBeforeArray)
 
   //get index of highest value
   let indexOfMaxValue = scoreProjection.indexOf(Math.max(...scoreProjection));
-  console.log(indexOfMaxValue)
+  console.log(indexOfMaxValue, counter)
 
-  switch (indexOfMaxValue) {
-    case 0:
-      executeLeft();
-      console.log("left");
-      break;
-    case 1:
-      executeRight();
-      console.log("right");
-      break;
-    case 2:
-      executeUp();
-      console.log("up");
-      break;
-    default:
-      executeDown();
-      console.log("down");
-      break;
-  }
+  executeMove(indexOfMaxValue)
 
   let matrix = buildMatrix();
   let zeroPresent = checkZero(matrix);
 
   if (checkMoveMade(beforeArray) && zeroPresent) {
     insertRandomTwo(boardArray);
+  } else if (indexOfMaxValue == 0) {
+    executeUp()
+    insertRandomTwo(boardArray)
+  } else if (indexOfMaxValue == 2) {
+    executeLeft()
+    insertRandomTwo(boardArray)
   } else {
-    while (!checkMoveMade(beforeArray)) {
-      executeRandomMove();
-    }
-    insertRandomTwo(boardArray);
+    executeRight()
+    executeUp()
   }
 
   updateScore();
@@ -69,11 +74,18 @@ let advancedSteps = () => {
     gameOver();
     botGameOver = true;
   }
+
+  counterTwo += 1
 };
 
-let executeRandomMove = () => {
-  let random = Math.floor(Math.random() * Math.floor(4));
-  switch (random) {
+let executeRandom = () => {
+  let random = Math.floor(Math.random() * Math.floor(4))
+  executeMove(random)
+  return
+}
+
+let executeMove = (index) => {
+  switch (index) {
     case 0:
       executeLeft();
       console.log("left");
