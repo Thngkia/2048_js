@@ -1,5 +1,6 @@
 var gameDisplay = document.getElementById("gameBoard")
 var scoreCounter = document.getElementById("score-counter")
+var score = 0
 var size = 4
 var boardArray = []
 
@@ -9,6 +10,7 @@ let createStartingBoard = () => {
   insertRandomTwoOrFour(boardArray);
   insertRandomTwoOrFour(boardArray);
   addTileColors()
+  updateScore()
   updateHighScore()
 }
 
@@ -54,6 +56,7 @@ let insertRandomTwo = (boardArray) => {
   if (boardArray[random].innerHTML == 0) {
     boardArray[random].innerHTML = 2
     boardArray[random].classList.add("box-transition")
+    score += 2
     return
   } else {
     insertRandomTwo(boardArray)
@@ -72,11 +75,7 @@ let slideRight = () => {
       filtered.unshift(0) 
     }
     for (let j = 0; j < size ; j++) {
-      boardArray[i*size + j].innerHTML = filtered[j]
-      // changing animation classes
-      // boardArray[i*size + j].classList.remove("box-slide-right")
-      //boardArray[i*size + j].classList.remove("box-slide-up", "box-slide-down", "box-slide-left")
-      
+      boardArray[i*size + j].innerHTML = filtered[j]      
       if (filtered[j] == 0) {
         boardArray[i*size + j].classList.remove("box-transition", "box-slide-right")
       } else {
@@ -95,6 +94,8 @@ let combineRight = () => {
       if (rightVar == leftVar) {
         boardArray[i * size + j + 1].innerHTML = leftVar + rightVar
         boardArray[i * size + j].innerHTML = 0
+        score += (leftVar +rightVar)
+        console.log(score)
         j-=2
       } else {
         j--
@@ -116,9 +117,6 @@ let slideLeft = () => {
     }
     for (let j = 0; j < size ; j++) {
       boardArray[i*size + j].innerHTML = filtered[j]
-      // changing animation classes
-      //boardArray[i*size + j].classList.remove("box-slide-up", "box-slide-down", "box-slide-right")
-      // boardArray[i*size + j].classList.add("box-transition", "box-slide-left")
       if (filtered[j] == 0) {
         boardArray[i*size + j].classList.remove("box-transition", "box-slide-left")
       } else {
@@ -136,6 +134,8 @@ let combineLeft = () => {
       if (rightVar == leftVar && rightVar != 0) {
         boardArray[i * size + j].innerHTML = leftVar + rightVar
         boardArray[i * size + j + 1].innerHTML = 0
+        score += (leftVar +rightVar)
+        console.log(score)
         j+=2
       } else {
         j++
@@ -159,9 +159,6 @@ let slideUp = () => {
     }
     for (let j = 0; j < size ; j++) {
       rotatedBoardArray[i*size + j].innerHTML = filtered[j]
-      // changing animation classes
-      //boardArray[i*size + j].classList.remove("box-slide-down", "box-slide-left", "box-slide-right")
-      // rotatedBoardArray[i*size + j].classList.add("box-transition", "box-slide-up")
       if (filtered[j] == 0) {
         rotatedBoardArray[i*size + j].classList.remove("box-transition", "box-slide-up")
       } else {
@@ -181,6 +178,8 @@ let combineUp = () => {
       if (rightVar == leftVar) {
         rotatedBoardArray[i * size + j + 1].innerHTML = leftVar + rightVar
         rotatedBoardArray[i * size + j].innerHTML = 0
+        score += (leftVar +rightVar)
+        console.log(score)
         j -= 2
       } else {
         j--
@@ -204,9 +203,6 @@ let slideDown = () => {
     }
     for (let j = 0; j < size ; j++) {
       rotatedBoardArray[i*size + j].innerHTML = filtered[j]
-      // changing animation classes
-      //boardArray[i*size + j].classList.remove("box-slide-up", "box-slide-left", "box-slide-right")
-      // rotatedBoardArray[i*size + j].classList.add("box-transition", "box-slide-down")
       if (filtered[j] == 0) { 
         rotatedBoardArray[i*size + j].classList.remove("box-transition", "box-slide-down")
       } else {
@@ -226,6 +222,8 @@ let combineDown = () => {
       if (rightVar == leftVar) {
         rotatedBoardArray[i * size + j].innerHTML = leftVar + rightVar
         rotatedBoardArray[i * size + j + 1].innerHTML = 0
+        score += (leftVar +rightVar)
+        console.log(score)
         j+=2
       } else {
         j++
@@ -248,14 +246,7 @@ let rotateBoard = () => {
   return rotatedBoardArray
 }
 
-// let checkMoveMade = (beforeArray) => {
-//   if (madeMove(beforeArray)) { 
-//     insertRandomTwo(boardArray)
-//     return true
-//   } else {
-//     return false
-//   }
-// }
+
 
 let checkMoveMade = (beforeArray) => {
   for (let i = 0; i < beforeArray.length; i++) {
@@ -267,16 +258,11 @@ let checkMoveMade = (beforeArray) => {
 }
 
 let updateScore = () => {
-  let score = 0
-  boardArray.forEach(element => {
-    score += parseInt(element.innerHTML)
-  })
-  score = Math.round(score ** 1.3)
   scoreCounter.innerHTML = score
-  updateHighScore(score)
+  updateHighScore()
 }
 
-let updateHighScore = (score) => {
+let updateHighScore = () => {
   let highScore = localStorage.getItem("highScore")
   if(highScore !== null) {
     if (score > highScore) {
@@ -524,20 +510,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ----------------------------experimented code----------------------------------
 // let slideLeft = () => {
 //   for (let i = 0; i < size; i++) {
@@ -549,5 +521,24 @@ document.addEventListener('DOMContentLoaded', () => {
 //       boardArray[i*size + j + 1].innerHTML = 0
 //      }
 //    }
+//   }
+// }
+
+// let updateScore = () => {
+//   let score = 0
+//   boardArray.forEach(element => {
+//     score += parseInt(element.innerHTML)
+//   })
+//   score = Math.round(score ** 1.3)
+//   scoreCounter.innerHTML = score
+//   updateHighScore(score)
+// }
+
+// let checkMoveMade = (beforeArray) => {
+//   if (madeMove(beforeArray)) { 
+//     insertRandomTwo(boardArray)
+//     return true
+//   } else {
+//     return false
 //   }
 // }
