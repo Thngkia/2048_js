@@ -248,16 +248,16 @@ let rotateBoard = () => {
   return rotatedBoardArray
 }
 
-let checkMoveMade = (beforeArray) => {
-  if (madeMove(beforeArray)) { 
-    insertRandomTwo(boardArray)
-    return true
-  } else {
-    return false
-  }
-}
+// let checkMoveMade = (beforeArray) => {
+//   if (madeMove(beforeArray)) { 
+//     insertRandomTwo(boardArray)
+//     return true
+//   } else {
+//     return false
+//   }
+// }
 
-let madeMove = (beforeArray) => {
+let checkMoveMade = (beforeArray) => {
   for (let i = 0; i < beforeArray.length; i++) {
     if (beforeArray[i] != boardArray[i].innerHTML) {
       return true
@@ -507,16 +507,15 @@ document.addEventListener('DOMContentLoaded', () => {
       executeDown()
       // checkMoveMade(beforeArray)
     }
-
-    checkMoveMade(beforeArray)
+    if (checkMoveMade(beforeArray)) {
+      insertRandomTwo(boardArray)
+    }
     updateScore()
     updateHighScore()
     addTileColors()
-    console.log("testing")
     if (checkGameOver()) {
       gameOver()
     }
-
   })
 })
 

@@ -1,4 +1,5 @@
 let counter = 0
+let botGameOver = false
 
 document.querySelector("#basic-ai").addEventListener("click", (e) => {
   function sleep(ms) {
@@ -7,7 +8,7 @@ document.querySelector("#basic-ai").addEventListener("click", (e) => {
   
   async function demo() {
     // Sleep in loop
-    for (let i = 0; i < 10000; i++) {
+    while (!botGameOver) {
       basicSteps()
       await sleep(100);
     }
@@ -30,8 +31,14 @@ let basicSteps = () => {
       executeUp()
     }
   }
+
+  let matrix = buildMatrix()
+  let zeroPresent = checkZero(matrix)
   
   console.log(checkMoveMade(beforeArray))
+  if (checkMoveMade(beforeArray) && zeroPresent) {
+    insertRandomTwo(boardArray)
+  }
   updateScore()
   updateHighScore()
   addTileColors()
@@ -39,7 +46,7 @@ let basicSteps = () => {
 
   if (checkGameOver()) {
     gameOver()
-    return
+    botGameOver = true
   }
 
   console.log(counter)
