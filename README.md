@@ -7,6 +7,7 @@
   * [References](#references)
 
 
+![sample gif of 2048](https://thngkia.github.io/2048_js/images/2048.gif)
 ### Description
 Click [here](https://thngkia.github.io/2048_js/) for the game
 
