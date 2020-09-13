@@ -26,32 +26,43 @@
         <!-- gameboard -->
         <div class="container col-8" id="gameBoard"></div>
 
-        <!-- sidebar  -->
+        <!-- score board  -->
         <div class="col-4"id="score-board">
           <div class="row">
-            <h1 class="col-4">Score:</h1>      
-            <div class="h1 col-8" id="score-counter"></div>
+            <h1 class="col-12">Score: <span class="h1 col-12" id="score-counter"></span></h1>      
+            <!-- <div class="h1 col-8" id="score-counter"></div> -->
           </div>
           <div class="row">
-            <h3 class="col-12">High Score:</h3>      
-            <div class="h3 col-12" id="high-score"></div>
+            <h3 class="col-12">High Score:<span class="h3 col-12" id="high-score"></span></h3>      
+            <!-- <div class="h3 col-12" id="high-score"></div> -->
           </div>
           
-          <button type="button" class="btn btn btn-warning btn-block" id="reset-button">Reset game</button>
-          <button type="button" class="btn btn btn-warning btn-block" id="reset-high-score">Reset High Score</button>
-          
+          <button type="button" class="btn btn btn-warning btn-block" id="reset-button"><h4>Reset game</h4></button>
+          <button type="button" class="btn btn btn-warning btn-block" id="reset-high-score"><h4>Reset High Score</h4></button>
+    
+          <div class="row" id="instructions"> 
+            <h4 class="col-12 text-center">Use the arrow keys to move the tiles. Combine same numbered tiles to get a higher score!</h4>
+          </div>
+
           <div class="row">
-            <h4 class="col-12">Objective: try to get to 2048 by using the arrow keys to move the board. The numbers that
-              are the same will combine.
-            </h4>
+            <div class="col-12"><button type="button" class="btn btn btn-primary btn-block" id="hint-ai"><h3>Hint</h3></button></div>
           </div>
+
+          <div class="row" id="auto-run-block">
+            <div class="col-6"><button type="button" class="btn btn btn-info btn-lg" id="basic-ai">Auto Run (Basic)</button></div>
+            <div class="col-6"><button type="button" class="btn btn btn-info btn-lg" id="advanced-ai">Auto Run (Pro)</button></div>
+          </div>
+          <!-- <button type="button" class="btn btn btn-primary btn-block" id="hint-ai">Hint</button>
           <button type="button" class="btn btn btn-info btn-block" id="basic-ai">Auto Run (Basic)</button>
           <button type="button" class="btn btn btn-info btn-block" id="advanced-ai">Auto Run (Advanced)</button>
-          <button type="button" class="btn btn btn-info btn-block" id="hint-ai">Hint (Advanced)</button>
+           -->
         </div>
         
       </div>
+      <div class="lead">Inspired by the game from Gabriele Cirulli</div>
     </div>
+    
+    
 
     <div class="modal fade" id="game-over-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">

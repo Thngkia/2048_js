@@ -179,7 +179,6 @@ let combineUp = () => {
         rotatedBoardArray[i * size + j + 1].innerHTML = leftVar + rightVar
         rotatedBoardArray[i * size + j].innerHTML = 0
         score += (leftVar + rightVar)
-        // console.log(score)
         j -= 2
       } else {
         j--
@@ -232,7 +231,6 @@ let combineDown = () => {
   }
 }
 
-
 //rotate board 90 deg clockwise
 let rotateBoard = () => {
   let rotatedBoardArray = []
@@ -245,8 +243,6 @@ let rotateBoard = () => {
   }
   return rotatedBoardArray
 }
-
-
 
 let checkMoveMade = (beforeArray) => {
   for (let i = 0; i < beforeArray.length; i++) {
