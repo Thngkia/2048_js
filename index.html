@@ -22,7 +22,11 @@
       </header>
 
       <div class="row" id="game-space">
+
+        <!-- gameboard -->
         <div class="container col-8" id="gameBoard"></div>
+
+        <!-- sidebar  -->
         <div class="col-4"id="score-board">
           <div class="row">
             <h1 class="col-4">Score:</h1>      
@@ -35,8 +39,15 @@
           
           <button type="button" class="btn btn btn-warning btn-block" id="reset-button">Reset game</button>
           <button type="button" class="btn btn btn-warning btn-block" id="reset-high-score">Reset High Score</button>
-          <button type="button" class="btn btn btn-warning btn-block" id="basic-ai">Auto Run (Noob)</button>
-          <button type="button" class="btn btn btn-warning btn-block" id="advanced-ai">Auto Run (Advanced)</button>
+          
+          <div class="row">
+            <h4 class="col-12">Objective: try to get to 2048 by using the arrow keys to move the board. The numbers that
+              are the same will combine.
+            </h4>
+          </div>
+          <button type="button" class="btn btn btn-info btn-block" id="basic-ai">Auto Run (Basic)</button>
+          <button type="button" class="btn btn btn-info btn-block" id="advanced-ai">Auto Run (Advanced)</button>
+          <button type="button" class="btn btn btn-info btn-block" id="hint-ai">Hint (Advanced)</button>
         </div>
         
       </div>
@@ -71,5 +82,6 @@
     <script src="app.js"></script>
     <script src="basic_ai.js"></script>
     <script src="advanced_ai.js"></script>
+    <script src="hint_function.js"></script>
   </body>
 </html>

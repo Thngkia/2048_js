@@ -15,8 +15,12 @@ This is an adaption of the popular game by Gabriele Cirulli. The way this game w
 
 ### Gameplay
 Using the 4 arrow keys on your keyboard, slide the tiles in the direction of where you would like all the tiles to go.
+When tiles of the same number meets, they will combine to form a tile with double the value.
 
 *hint: try to keep the largest tile at one of the corners of the grid
+
+If you would like to get some assistance, there is the basic and the advanced auto run functions
+
 
 ### Technologies
 HTML, CSS, JavaScript

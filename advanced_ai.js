@@ -1,21 +1,23 @@
 let possibleScore = 0;
 let counterTwo = 1
 
+//query selector for the advanced auto run button
 document.querySelector("#advanced-ai").addEventListener("click", (e) => {
   function sleepTwo(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  // async function
   async function asyncfunc() {
     // Sleep in loop
     while (!botGameOver) {
       advancedSteps();
+      // wait for promise
       await sleepTwo(100);
     }
   }
   asyncfunc();
 });
-
 
 let advancedSteps = () => {
   let beforeArray = boardArray.map((item) => parseInt(item.innerHTML));
@@ -26,6 +28,7 @@ let advancedSteps = () => {
   let tempArr = beforeArray.slice(0, 4)
   let inlusiveOfZero = tempArr.includes(0)
   let haveDuplicates = new Set(tempArr).size !== tempArr.length
+
   // do it under these conditions
   if(counterTwo % 5 == 0 && counterTwo > 100 && !inlusiveOfZero && !haveDuplicates) {
     executeRight()
@@ -40,7 +43,7 @@ let advancedSteps = () => {
   let scoreProjection = [];
   // check score of all directions
   scoreProjection[0] = scoreLeft(beforeArray)
-  scoreProjection[1] = 0
+  scoreProjection[1] = scoreRight(beforeArray)
   scoreProjection[2] = scoreUp(rotatedBeforeArray)
   scoreProjection[3] = scoreDown(rotatedBeforeArray)
 
@@ -48,11 +51,16 @@ let advancedSteps = () => {
   let indexOfMaxValue = scoreProjection.indexOf(Math.max(...scoreProjection));
   console.log(indexOfMaxValue, counter)
 
-  executeMove(indexOfMaxValue)
+  // if move not made, make the best possible move
+  if (!checkMoveMade(beforeArray)) {
+    executeMove(indexOfMaxValue)
+  }
 
+  // check if zero is present 
   let matrix = buildMatrix();
   let zeroPresent = checkZero(matrix);
 
+  // if no move was made previously, move either up or left (oppposite from previous move),to combine numbers
   if (checkMoveMade(beforeArray) && zeroPresent) {
     insertRandomTwo(boardArray);
   } else if (indexOfMaxValue == 0) {
@@ -130,7 +138,7 @@ let scoreLeft = (beforeMatrix) => {
     possibleScore += element;
   });
 
-  console.log(copy, possibleScore);
+  console.log(copy, possibleScore, "left");
   return possibleScore;
 };
 
@@ -173,14 +181,19 @@ let scoreRight = (beforeMatrix) => {
   let copy = beforeMatrix.slice();
 
   possibleScore = 0;
+  console.log(copy, 0)
   slideMatrixRight(copy);
+  console.log(copy, 1)
   combineMatrixRight(copy);
+  console.log(copy, 2)
   slideMatrixRight(copy);
+  console.log(copy, 3)
 
   copy.forEach((element) => {
     possibleScore += element;
   });
 
+  console.log(copy, possibleScore, "right")
   return possibleScore;
 };
 
@@ -210,7 +223,7 @@ let combineMatrixRight = (beforeMatrix) => {
       let leftVar = beforeMatrix[i * size + j];
       if (rightVar == leftVar) {
         beforeMatrix[i * size + j + 1] = leftVar + rightVar;
-        beforeMatrix[i * size + j].innerHTML = 0;
+        beforeMatrix[i * size + j] = 0;
         possibleScore += rightVar + leftVar;
         j -= 2;
       } else {
