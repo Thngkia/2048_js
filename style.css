@@ -39,6 +39,10 @@ header {
   font-size: 1rem;
 }
 
+.arrow-div > *{
+  color: #7e8a97;
+}
+
 #up-arrow {
   font-size: 3rem;
 }
@@ -142,5 +146,5 @@ header {
 }
 
 .blink-key {
-  color: blue;
+  color: black;
 }

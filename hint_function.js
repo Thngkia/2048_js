@@ -15,25 +15,25 @@ document.querySelector("#hint-ai").addEventListener("click", (e) => {
       leftArrow.classList.add("blink")
       setTimeout(function() {
         leftArrow.classList.remove("blink")
-      }, 3000)
+      }, 1500)
       break;
     case 1:
       rightArrow.classList.add("blink")
       setTimeout(function() {
         rightArrow.classList.remove("blink")
-      }, 3000)
+      }, 1500)
       break;
     case 2:
       upArrow.classList.add("blink")
       setTimeout(function() {
         upArrow.classList.remove("blink")
-      }, 3000)
+      }, 1500)
       break;
     default:
       downArrow.classList.add("blink")
       setTimeout(function() {
         downArrow.classList.remove("blink")
-      }, 3000)
+      }, 1500)
       break;
   }
 })
