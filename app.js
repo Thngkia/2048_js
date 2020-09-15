@@ -3,6 +3,10 @@ var scoreCounter = document.getElementById("score-counter")
 var score = 0
 var size = 4
 var boardArray = []
+var leftArrow = document.querySelector("#left-arrow")
+var rightArrow = document.querySelector("#right-arrow")
+var upArrow = document.querySelector("#up-arrow")
+var downArrow = document.querySelector("#down-arrow")
 
 // This is to create the starting game, which consists of a gameboard, 2 random numbers and the color of the tiles
 let createStartingBoard = () => {
@@ -477,15 +481,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // checkGameEnd()
     // check key direction and execute the move
     if (e.key == 'ArrowRight') {
+      rightArrow.classList.add("blink-key")
+      setTimeout(function() {
+        rightArrow.classList.remove("blink-key")
+      }, 500)
       executeRight()
       // checkMoveMade(beforeArray)
     } else if (e.key == 'ArrowLeft') {
+      leftArrow.classList.add("blink-key")
+      setTimeout(function() {
+        leftArrow.classList.remove("blink-key")
+      }, 500)
       executeLeft()
       // checkMoveMade(beforeArray)
     } else if (e.key == 'ArrowUp') {
+      upArrow.classList.add("blink-key")
+      setTimeout(function() {
+        upArrow.classList.remove("blink-key")
+      }, 500)
       executeUp()
       // checkMoveMade(beforeArray)
     } else if (e.key == 'ArrowDown') {
+      downArrow.classList.add("blink-key")
+      setTimeout(function() {
+        downArrow.classList.remove("blink-key")
+      }, 500)
       executeDown()
       // checkMoveMade(beforeArray)
     }

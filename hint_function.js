@@ -12,16 +12,28 @@ document.querySelector("#hint-ai").addEventListener("click", (e) => {
 
   switch (indexOfMaxValue) {
     case 0:
-      alert("Move Left!")
+      leftArrow.classList.add("blink")
+      setTimeout(function() {
+        leftArrow.classList.remove("blink")
+      }, 3000)
       break;
     case 1:
-      alert("Move Right!")
+      rightArrow.classList.add("blink")
+      setTimeout(function() {
+        rightArrow.classList.remove("blink")
+      }, 3000)
       break;
     case 2:
-      alert("Move Up!")
+      upArrow.classList.add("blink")
+      setTimeout(function() {
+        upArrow.classList.remove("blink")
+      }, 3000)
       break;
     default:
-      alert("Move Down!")
+      downArrow.classList.add("blink")
+      setTimeout(function() {
+        downArrow.classList.remove("blink")
+      }, 3000)
       break;
   }
 })

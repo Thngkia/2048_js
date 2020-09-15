@@ -8,6 +8,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <link rel="stylesheet" href="style.css">
@@ -36,21 +39,35 @@
             <h3 class="col-12">High Score:<span class="h3 col-12" id="high-score"></span></h3>      
             <!-- <div class="h3 col-12" id="high-score"></div> -->
           </div>
+          <div class="row">
+            <div class="col"><button type="button" class="btn btn btn-warning btn-block" id="reset-button"><i class="fas fa-sync-alt"></i> Restart</button></div>
+            <div class="col"><button type="button" class="btn btn btn-warning btn-block" id="reset-high-score">Reset High Score</button></div>
           
-          <button type="button" class="btn btn btn-warning btn-block" id="reset-button"><h4>Reset game</h4></button>
-          <button type="button" class="btn btn btn-warning btn-block" id="reset-high-score"><h4>Reset High Score</h4></button>
+          </div>
     
           <div class="row" id="instructions"> 
-            <h4 class="col-12 text-center">Use the arrow keys to move the tiles. Combine same numbered tiles to get a higher score!</h4>
+            <h5 class="col-12 text-center">Use the arrow keys to move the tiles. Combine same numbered tiles to get a higher score!</h5>
           </div>
 
           <div class="row">
-            <div class="col-12"><button type="button" class="btn btn btn-primary btn-block" id="hint-ai"><h3>Hint</h3></button></div>
+            <div class="col"></div>
+            <i class="fas fa-caret-square-up" id="up-arrow"></i>
+            <div class="col"></div>
+          </div>
+
+          <div class="row text-center">
+            <div class="col"></div>
+            <i class="fas fa-caret-square-left" id="left-arrow"></i><i class="fas fa-caret-square-down" id="down-arrow"></i><i class="fas fa-caret-square-right" id="right-arrow"></i>
+            <div class="col"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-12"><button type="button" class="btn btn btn-primary btn-block" id="hint-ai">Hint</button></div>
           </div>
 
           <div class="row" id="auto-run-block">
-            <div class="col-6"><button type="button" class="btn btn btn-info btn-lg" id="basic-ai">Auto Run (Basic)</button></div>
-            <div class="col-6"><button type="button" class="btn btn btn-info btn-lg" id="advanced-ai">Auto Run (Pro)</button></div>
+            <div class="col-6"><button type="button" class="btn btn btn-info btn-block" id="basic-ai">Auto Run (Basic)</button></div>
+            <div class="col-6"><button type="button" class="btn btn btn-info btn-block" id="advanced-ai">Auto Run (Pro)</button></div>
           </div>
         </div>
         <div class="lead">Inspired by the game from Gabriele Cirulli</div>
